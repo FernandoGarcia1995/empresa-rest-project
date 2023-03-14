@@ -1,12 +1,14 @@
 package com.company.project.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -38,6 +40,8 @@ public class Cliente {
     @Column(name = "fecha_registro")
     private Date fechaRegistro;
     
+    @OneToMany(mappedBy = "cliente")
+    private List<Venta> ventas;
 
 	public Cliente() {
 	}
@@ -105,6 +109,13 @@ public class Cliente {
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
-	
 
+	public List<Venta> getVentas() {
+		return ventas;
+	}
+
+	public void setVentas(List<Venta> ventas) {
+		this.ventas = ventas;
+	}
+	
 }

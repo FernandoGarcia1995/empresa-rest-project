@@ -1,12 +1,14 @@
 package com.company.project.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -31,6 +33,9 @@ public class Producto {
 
     @Column(name = "stock")
     private int stock;
+    
+    @OneToMany(mappedBy = "producto")
+    private List<Venta> ventas;
     
 	public Producto() {
 	}
@@ -82,7 +87,13 @@ public class Producto {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-    
-    
-    
+
+	public List<Venta> getVentas() {
+		return ventas;
+	}
+
+	public void setVentas(List<Venta> ventas) {
+		this.ventas = ventas;
+	}
+
 }

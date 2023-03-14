@@ -1,6 +1,7 @@
 package com.company.project.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -49,6 +51,9 @@ public class Empleado {
     @ManyToOne
     @JoinColumn(name = "departamento_id")
     private Departamento departamento;
+    
+    @OneToMany(mappedBy = "empleado")
+    private List<Venta> ventas;
     
 	public Empleado() {
 	}
@@ -140,6 +145,14 @@ public class Empleado {
 
 	public void setDni(String dni) {
 		this.dni = dni;
+	}
+
+	public List<Venta> getVentas() {
+		return ventas;
+	}
+
+	public void setVentas(List<Venta> ventas) {
+		this.ventas = ventas;
 	}
 
 }
