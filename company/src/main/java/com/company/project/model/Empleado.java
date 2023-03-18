@@ -3,6 +3,7 @@ package com.company.project.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "empleados")
@@ -31,6 +35,7 @@ public class Empleado {
     private String dni;
 
     @Column(name = "fecha_nacimiento")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date fechaNacimiento;
     
     @Column(name = "correo_electronico")
@@ -43,6 +48,7 @@ public class Empleado {
     private String telefono;
 
     @Column(name = "fecha_contratacion")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date fechaContratacion;
 
     @Column(name = "salario")
@@ -52,7 +58,8 @@ public class Empleado {
     @JoinColumn(name = "departamento_id")
     private Departamento departamento;
     
-    @OneToMany(mappedBy = "empleado")
+    @JsonIgnore
+    @OneToMany(mappedBy = "empleado",orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Venta> ventas;
     
 	public Empleado() {

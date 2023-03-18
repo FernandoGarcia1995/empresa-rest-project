@@ -44,7 +44,7 @@ public class GestionClienteController {
 		return new ResponseEntity<CommonResponse<List<Cliente>>>(clienteService.devolverCliente(), HttpStatus.OK);	
 	}
 	
-	@GetMapping("/actualizarCliente")
+	@PostMapping("/actualizarCliente")
 	public ResponseEntity<CommonResponse<Cliente>> actualizarCliente (@RequestBody Cliente cliente) {
 		return new ResponseEntity<CommonResponse<Cliente>>(clienteService.actualizarCliente(cliente), HttpStatus.OK);
 	}

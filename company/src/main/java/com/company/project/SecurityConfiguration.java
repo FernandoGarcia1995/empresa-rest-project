@@ -50,8 +50,11 @@ public class SecurityConfiguration {
 	public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		http.authorizeRequests().antMatchers("/access/**").permitAll();
-		http.authorizeRequests().antMatchers("/gestion/**").hasAnyRole("EMPLOYEE", "ADMIN");
-		http.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers("/cliente/**").hasAnyRole("EMPLOYEE", "ADMIN");
+		http.authorizeRequests().antMatchers("/venta/**").hasAnyRole("EMPLOYEE", "ADMIN");
+		http.authorizeRequests().antMatchers("/producto/**").hasAnyRole("EMPLOYEE", "ADMIN");
+		http.authorizeRequests().antMatchers("/empleado/**").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers("/departamento/**").hasRole("ADMIN");
 		http.authorizeRequests().anyRequest().authenticated().and().logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout");
 		http.httpBasic(withDefaults());
 		return http.build();
