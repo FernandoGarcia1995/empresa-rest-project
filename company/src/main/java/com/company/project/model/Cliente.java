@@ -46,7 +46,7 @@ public class Cliente {
     private Date fechaRegistro;
     
     @JsonIgnore
-    @OneToMany(mappedBy = "cliente",orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
     private List<Venta> ventas;
 
 	public Cliente() {

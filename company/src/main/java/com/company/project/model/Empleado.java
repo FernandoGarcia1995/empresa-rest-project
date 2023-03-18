@@ -59,7 +59,7 @@ public class Empleado {
     private Departamento departamento;
     
     @JsonIgnore
-    @OneToMany(mappedBy = "empleado",orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "empleado",cascade = CascadeType.ALL)
     private List<Venta> ventas;
     
 	public Empleado() {

@@ -40,7 +40,7 @@ public class Producto {
     private int stock;
     
     @JsonIgnore
-    @OneToMany(mappedBy = "producto",orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "producto",cascade = CascadeType.ALL)
     private List<Venta> ventas;
     
 	public Producto() {

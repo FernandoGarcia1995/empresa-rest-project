@@ -29,7 +29,7 @@ public class Departamento {
     private String descripcion;
     
     @JsonIgnore
-    @OneToMany(mappedBy = "departamento",orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "departamento",cascade = CascadeType.ALL)
     private List<Empleado> empleados;
     
 
