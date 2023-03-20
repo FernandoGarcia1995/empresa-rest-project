@@ -5,4 +5,4 @@
 **ER diagrama**
 
 
-![alt text](https://i.imgur.com/UF8gpp1.png)
+![alt text](https://i.imgur.com/qdsIbPB.png)
