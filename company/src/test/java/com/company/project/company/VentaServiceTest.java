@@ -40,13 +40,13 @@ public class VentaServiceTest {
 	
 	@Test
 	public void buscarVentaPorClienteAndEmpleadoTest() {
-		Venta venta = ventaService.buscarVentaPorClienteAndEmpleado("Sofia", "Juan").getBody();
+		Venta venta = ventaService.BuscarClienteDniAndEmpleadoDniAndProductoNombre("75965237D", "43014945T","Producto 1").getBody();
 		assertNotNull(venta);	
 	}
 	
 	@Test
 	public void registrarVentaTest() {
-		Cliente cliente = clienteService.buscarClientePorDni("41361421S").getBody();
+		Cliente cliente = clienteService.buscarClientePorDni("75965237D").getBody();
 		Empleado empleado = empleadoService.buscarEmpleadoPorDni("43014945T").getBody();
 		Producto producto = productoService.buscarProductoPorNombre("Producto 1").getBody();
 		Venta venta = new Venta();
@@ -55,10 +55,8 @@ public class VentaServiceTest {
 		venta.setFecha(new Date());
 		venta.setProducto(producto);
 		venta.setCantidad(1000);
-		
-		ventaService.registrarVenta(venta);
-		
-		Venta checkVenta = ventaService.buscarVentaPorClienteAndEmpleado("Diego", "Juan").getBody();
+		ventaService.registrarVenta(venta, "43014945T", "75965237D", "Producto 1");
+		Venta checkVenta = ventaService.BuscarClienteDniAndEmpleadoDniAndProductoNombre("75965237D", "43014945T", "Producto 1").getBody();
 		assertNotNull(checkVenta);		
 	}
 	
@@ -74,11 +72,9 @@ public class VentaServiceTest {
 		venta.setFecha(new Date());
 		venta.setProducto(producto);
 		venta.setCantidad(1000);
-		ventaService.registrarVenta(venta);
-		
-		ventaService.eliminarPorClienteAndEmpleado("42478852Z", "43014945T");	
-		Venta checkVenta = ventaService.buscarVentaPorClienteAndEmpleado("Isabella", "Juan").getBody();
-		
+		ventaService.registrarVenta(venta, "43014945T", "42478852Z", "Producto 1");
+		ventaService.eliminarPorClienteDniAndEmpleadoDniAndProductoNombre("42478852Z", "43014945T", "Producto 1");	
+		Venta checkVenta = ventaService.BuscarClienteDniAndEmpleadoDniAndProductoNombre("42478852Z", "43014945T", "Producto 1").getBody();
 		assertNull(checkVenta);
 	}
 	
@@ -91,9 +87,9 @@ public class VentaServiceTest {
 	
 	@Test
 	public void actualizarVentaTest() {
-		Venta venta = ventaService.buscarVentaPorClienteAndEmpleado("Sofia", "Juan").getBody();
+		Venta venta = ventaService.BuscarClienteDniAndEmpleadoDniAndProductoNombre("75965237D", "43014945T", "Producto 1").getBody();
 		venta.setCantidad(2);
-		Venta VentaActualizado = ventaService.actualizarVenta(venta).getBody();
+		Venta VentaActualizado = ventaService.actualizarVenta(venta, "75965237D", "43014945T", "Producto 1").getBody();
 		assertThat(VentaActualizado.getCantidad()).isEqualTo(2);
 	}
 	

@@ -1,7 +1,6 @@
 package com.company.project.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,23 +24,23 @@ public class GestionVentaController {
 	private VentaService ventaService;
 	
 	@PostMapping("/registrarVenta")
-	public ResponseEntity<CommonResponse<Venta>> registrarVenta (@RequestBody Venta venta){
-		return new ResponseEntity<CommonResponse<Venta>>(ventaService.registrarVenta(venta), HttpStatus.CREATED);
+	public ResponseEntity<CommonResponse<Venta>> registrarVenta (@RequestBody Venta venta,@RequestParam String dniEmpleado,@RequestParam String dniCliente,@RequestParam String nombreProducto){
+		return new ResponseEntity<CommonResponse<Venta>>(ventaService.registrarVenta(venta, dniCliente, dniEmpleado,nombreProducto), HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/buscarVenta")
-	public ResponseEntity<CommonResponse<Venta>> buscarVenta(@RequestParam String dniCliente,@RequestParam String dniEmpleado) {
-		return new ResponseEntity<CommonResponse<Venta> >(ventaService.buscarVentaPorClienteAndEmpleado(dniCliente, dniEmpleado), HttpStatus.OK);	
+	public ResponseEntity<CommonResponse<Venta>> buscarVenta(@RequestParam String dniCliente,@RequestParam String dniEmpleado,@RequestParam String nombreProducto) {
+		return new ResponseEntity<CommonResponse<Venta> >(ventaService.BuscarClienteDniAndEmpleadoDniAndProductoNombre(dniCliente, dniEmpleado, nombreProducto), HttpStatus.OK);	
 	}
 	
 	@DeleteMapping("/eliminarVenta")
-	public ResponseEntity<CommonResponse> eliminarVenta (@RequestParam String dniCliente,@RequestParam String dniEmpleado) {
-		return new ResponseEntity<CommonResponse>(ventaService.eliminarPorClienteAndEmpleado(dniCliente, dniEmpleado), HttpStatus.OK);	
+	public ResponseEntity<CommonResponse> eliminarVenta (@RequestParam String dniCliente,@RequestParam String dniEmpleado,@RequestParam String nombreProducto) {
+		return new ResponseEntity<CommonResponse>(ventaService.eliminarPorClienteDniAndEmpleadoDniAndProductoNombre(dniCliente, dniEmpleado, nombreProducto), HttpStatus.OK);	
 	}
 	
 	@PostMapping("/actualizarVenta")
-	public ResponseEntity<CommonResponse<Venta>> actualizarVentas (@RequestBody Venta venta) {
-		return new ResponseEntity<CommonResponse<Venta>>(ventaService.actualizarVenta(venta), HttpStatus.OK);
+	public ResponseEntity<CommonResponse<Venta>> actualizarVentas (@RequestBody Venta venta,@RequestParam String dniEmpleado,@RequestParam String dniCliente,@RequestParam String nombreProducto) {
+		return new ResponseEntity<CommonResponse<Venta>>(ventaService.actualizarVenta(venta, dniCliente, dniEmpleado, nombreProducto), HttpStatus.OK);
 	}
 	
 	@GetMapping("/devolverVentas")

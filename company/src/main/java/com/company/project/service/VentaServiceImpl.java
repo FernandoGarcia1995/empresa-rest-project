@@ -9,7 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.company.project.interfaces.VentaService;
+import com.company.project.model.Cliente;
+import com.company.project.model.Empleado;
+import com.company.project.model.Producto;
 import com.company.project.model.Venta;
+import com.company.project.repository.ClienteRepository;
+import com.company.project.repository.EmpleadoRepository;
+import com.company.project.repository.ProductoRepository;
 import com.company.project.repository.VentaRepository;
 import com.company.project.response.CommonResponse;
 
@@ -20,13 +26,23 @@ public class VentaServiceImpl implements VentaService {
 	
 	@Autowired
 	private VentaRepository ventaRepository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private EmpleadoRepository empleadoRepository;
+	
+	@Autowired
+	private ProductoRepository productoRepository;
+	
+	
 
-	//cambiar nombresCliente y nombreEmpleado por DNI
 	@Override
-	public CommonResponse<Venta> buscarVentaPorClienteAndEmpleado(String dniCliente, String dniEmpleado) {
+	public CommonResponse<Venta> BuscarClienteDniAndEmpleadoDniAndProductoNombre(String dniCliente, String dniEmpleado,String productoNombre) {
 		Venta ventaOut = new Venta();
 		try {
-			ventaOut = ventaRepository.findByClienteDniAndEmpleadoDni(dniEmpleado, dniCliente);
+			ventaOut = ventaRepository.findByClienteDniAndEmpleadoDniAndProductoNombre(dniEmpleado, dniCliente, productoNombre);
 		} catch (Exception ex) {
 			log.error("ERROR - {}", ex.getLocalizedMessage());
 		}
@@ -34,9 +50,9 @@ public class VentaServiceImpl implements VentaService {
 	}
 
 	@Override
-	public CommonResponse<?> eliminarPorClienteAndEmpleado(String dniCliente, String dniEmpleado) {
+	public CommonResponse<?> eliminarPorClienteDniAndEmpleadoDniAndProductoNombre(String dniCliente, String dniEmpleado,String productoNombre){
 		try {
-			Venta ventaToDeleted = ventaRepository.findByClienteDniAndEmpleadoDni(dniCliente, dniEmpleado);
+			Venta ventaToDeleted = ventaRepository.findByClienteDniAndEmpleadoDniAndProductoNombre(dniEmpleado, dniCliente, productoNombre);
 			ventaRepository.delete(ventaToDeleted);	
 		} catch (Exception ex) {
 			log.error("ERROR - {}", ex.getLocalizedMessage());
@@ -56,9 +72,17 @@ public class VentaServiceImpl implements VentaService {
 	}
 
 	@Override
-	public CommonResponse<Venta> actualizarVenta(Venta venta) {
+	public CommonResponse<Venta> actualizarVenta(Venta venta,String dniCliente, String dniEmpleado,String productoNombre) {
 		Venta ventaOut = new Venta();
 		try {
+			Cliente cliente = clienteRepository.findByDni(dniCliente);
+			Empleado empleado = empleadoRepository.findByDni(dniEmpleado);
+			Producto producto = productoRepository.findByNombre(productoNombre);
+			
+			venta.setCliente(cliente);
+			venta.setEmpleado(empleado);
+			venta.setProducto(producto);
+			
 			ventaOut = ventaRepository.save(venta);
 		} catch (Exception ex) {
 			log.error("ERROR - {}", ex.getLocalizedMessage());
@@ -67,9 +91,17 @@ public class VentaServiceImpl implements VentaService {
 	}
 
 	@Override
-	public CommonResponse<Venta> registrarVenta(Venta venta) {
+	public CommonResponse<Venta> registrarVenta(Venta venta,String dniCliente, String dniEmpleado,String productoNombre) {
 		Venta ventaOut = new Venta();
 		try {
+			Cliente cliente = clienteRepository.findByDni(dniCliente);
+			Empleado empleado = empleadoRepository.findByDni(dniEmpleado);
+			Producto producto = productoRepository.findByNombre(productoNombre);
+			
+			venta.setCliente(cliente);
+			venta.setEmpleado(empleado);
+			venta.setProducto(producto);
+			
 			ventaOut = ventaRepository.save(venta);
 		} catch (Exception ex) {
 			log.error("ERROR - {}", ex.getLocalizedMessage());

@@ -31,7 +31,6 @@ public class Departamento {
     @JsonIgnore
     @OneToMany(mappedBy = "departamento",cascade = CascadeType.ALL)
     private List<Empleado> empleados;
-    
 
 	public Departamento() {
 	}

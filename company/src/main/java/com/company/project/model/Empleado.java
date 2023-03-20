@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -61,6 +62,10 @@ public class Empleado {
     @JsonIgnore
     @OneToMany(mappedBy = "empleado",cascade = CascadeType.ALL)
     private List<Venta> ventas;
+    
+    @JsonIgnore
+    @OneToOne(mappedBy = "empleado",cascade = CascadeType.ALL)
+    private User user;
     
 	public Empleado() {
 	}

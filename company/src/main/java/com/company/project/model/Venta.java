@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "ventas")
 public class Venta {
@@ -20,6 +22,7 @@ public class Venta {
     private Long id;
 
     @Column(name = "fecha")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date fecha;
 
     @ManyToOne

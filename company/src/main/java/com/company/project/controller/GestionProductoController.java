@@ -44,7 +44,7 @@ public class GestionProductoController {
 		return new ResponseEntity<CommonResponse<Producto>>(productoService.actualizarProducto(producto), HttpStatus.OK);
 	}
 	
-	@GetMapping("/devolverProducto")
+	@GetMapping("/devolverProductos")
 	public ResponseEntity<CommonResponse<List<Producto>>>devolverProducto () {
 		return new ResponseEntity<CommonResponse<List<Producto>>>(productoService.devolverProducto(), HttpStatus.OK);
 	}

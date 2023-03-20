@@ -7,14 +7,14 @@ import com.company.project.response.CommonResponse;
 
 public interface VentaService {
 	
-	public CommonResponse<Venta> buscarVentaPorClienteAndEmpleado(String dniCliente,String dniEmpleado);
+	public CommonResponse<Venta> BuscarClienteDniAndEmpleadoDniAndProductoNombre(String dniCliente,String dniEmpleado,String productoNombre);
 	
-	public CommonResponse<?> eliminarPorClienteAndEmpleado(String dniCliente, String dniEmpleado);
+	public CommonResponse<?> eliminarPorClienteDniAndEmpleadoDniAndProductoNombre(String dniCliente, String dniEmpleado,String nombreProducto);
 	
 	public CommonResponse<List<Venta>> devolverVentas();
 	
-	public CommonResponse<Venta> actualizarVenta(Venta venta);
+	public CommonResponse<Venta> actualizarVenta(Venta venta,String dniCliente, String dniEmpleado,String nombreProducto);
 	
-	public CommonResponse<Venta> registrarVenta(Venta venta);
+	public CommonResponse<Venta> registrarVenta(Venta venta,String dniCliente,String dniEmpleado,String nombreProducto);
 	
 }

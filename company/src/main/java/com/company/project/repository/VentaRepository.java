@@ -9,7 +9,7 @@ import com.company.project.model.Venta;
 @Repository
 public interface VentaRepository extends JpaRepository<Venta,Long > {
 	
-	@Query ("FROM Venta where empleado.dni = :dniEmpleado AND cliente.dni = :dniCliente")
-	Venta findByClienteDniAndEmpleadoDni(String dniEmpleado,String dniCliente);
+	@Query ("FROM Venta where empleado.dni = :dniEmpleado AND cliente.dni = :dniCliente and producto.nombre = :nombreProducto ")
+	Venta findByClienteDniAndEmpleadoDniAndProductoNombre(String dniEmpleado,String dniCliente,String nombreProducto);
 
 }

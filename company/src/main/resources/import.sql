@@ -9,4 +9,5 @@ INSERT INTO productos (nombre, descripcion, precio, fecha_lanzamiento, stock) VA
 INSERT INTO productos (nombre, descripcion, precio, fecha_lanzamiento, stock) VALUES ('Producto 2', 'descripcion producto 2', 200, '2021-02-01', 40);
 INSERT INTO ventas (fecha, producto_id, cantidad, empleado_id, cliente_id) VALUES ('2021-01-01', 1, 1, 1, 2);
 INSERT INTO ventas (fecha, producto_id, cantidad, empleado_id, cliente_id) VALUES ('2021-01-01', 1, 1, 1, 3);
+INSERT INTO ventas (fecha, producto_id, cantidad, empleado_id, cliente_id) VALUES ('2021-01-01', 1, 2, 1, 5);
 INSERT INTO empresa.users (id, created_at, email, enabled, locked, password, rol, updated_at, username, empleado_id) VALUES(1, '2023-01-22 19:36:15', 'fergarcia@gmail.com', 1, 0, '$2a$10$v5fuboNps1P2LHh6De60vODO6bGV9FemgOBMql1S3qQhTf1nfoa46', 'ROLE_ADMIN', '2023-01-22 19:36:15', 'test', 1)
